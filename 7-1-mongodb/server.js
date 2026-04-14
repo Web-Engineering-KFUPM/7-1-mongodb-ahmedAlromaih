@@ -169,13 +169,13 @@
  * ===================================================== 
  * - This code will delete a document in database.
  *  
- *    async function deleteStudent() {
-         await Student.deleteOne({ name: "Sara" });
-      console.log("✅ Deleted Sara");
-      }
-      deleteStudent();
- * - Run server: node server.js and got to mongo cloud to verify, document is deleted.
- * 
+   *    async function deleteStudent() {
+            await Student.deleteOne({ name: "Sara" });
+         console.log("✅ Deleted Sara");
+         }
+         deleteStudent();
+   * - Run server: node server.js and got to mongo cloud to verify, document is deleted.
+   * 
  * Note on Collection Naming in Node.js (Mongoose)
  * When a collection is created in Node.js using Mongoose, the name is automatically converted to lowercase and plural form.
  *  Examples:
@@ -185,20 +185,44 @@
  */
 
 // import mongoose
-
+ import mongoose from "mongoose";
 // establish connection
-
+ mongoose.connect("mongodb+srv://lagging157:9oqXB7tWUXpvo19A@cluster0.rygtjue.mongodb.net/TestDB");
 
 // define schema
-
+const studentSchema = new mongoose.Schema({
+         name: String,
+         age: Number,
+         major: String
+      });
 
 // create document
 
-
+async function createStudents() {
+      await Student.insertMany([
+         { name: "Ali", age: 21, major: "CS" },
+         { name: "Sara", age: 23, major: "SE" }
+      ]);
+      console.log("✅ Inserted");
+      }
+      createStudents();
 // read document
-
+ async function updateStudent() {
+         await Student.updateOne({ name: "Ali" }, { age: 22 });
+         console.log("✅ Updated Ali");
+      }
+      updateStudent();
 
 // update document
-
+async function updateStudent() {
+         await Student.updateOne({ name: "Ali" }, { age: 22 });
+         console.log("✅ Updated Ali");
+      }
+      updateStudent();
 
 // delete document
+async function deleteStudent() {
+            await Student.deleteOne({ name: "Sara" });
+         console.log("✅ Deleted Sara");
+         }
+         deleteStudent();
